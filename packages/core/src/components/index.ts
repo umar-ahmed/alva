@@ -43,4 +43,5 @@ export * from './splash-screen';
 export * from './tab-switch';
 export * from './teaser';
 export * from './tag';
+export * from './update-badge';
 export * from './view-switch';
