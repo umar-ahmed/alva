@@ -3,6 +3,7 @@ import * as Hosts from '../hosts';
 import * as Types from '../types';
 import * as Serde from '../sender/serde';
 import { NodeAdapter } from '../adapters/node-adapter';
+import bugsnag from '@bugsnag/js';
 
 const importFresh = require('import-fresh');
 const clearModule = require('clear-module');
@@ -13,6 +14,8 @@ export interface ForcedFlags {
 }
 
 async function main(forced?: ForcedFlags): Promise<void> {
+	bugsnag('56bdf666b4c2ff8fb3ac769a0b9d5eb1');
+
 	const AlvaServer = importFresh(serverPath).AlvaServer as typeof Server.AlvaServer;
 
 	const nodeHost = await Hosts.NodeHost.fromProcess(process, forced);

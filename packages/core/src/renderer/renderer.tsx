@@ -1,3 +1,12 @@
+import bugsnag from '@bugsnag/js';
+import bugsnagReact from '@bugsnag/plugin-react';
+import * as React from 'react';
+
+const bugsnagClient = bugsnag('56bdf666b4c2ff8fb3ac769a0b9d5eb1');
+bugsnagClient.use(bugsnagReact, React);
+(window as any).bugsnag = bugsnagClient;
+const ErrorBoundary = bugsnagClient.getPlugin('react');
+
 import { App } from '../container/app';
 import { createListeners } from './create-listeners';
 import { createNotifiers } from './create-notifiers';
@@ -7,7 +16,6 @@ import { MessageType } from '../message';
 import * as Mobx from 'mobx';
 import * as MobxReact from 'mobx-react';
 import * as Model from '../model';
-import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { ViewStore } from '../store';
 import * as uuid from 'uuid';
@@ -157,9 +165,11 @@ export async function startRenderer(): Promise<void> {
 	createNotifiers({ app, store });
 
 	ReactDom.render(
-		<MobxReact.Provider app={app} store={store}>
-			<App />
-		</MobxReact.Provider>,
+		<ErrorBoundary>
+			<MobxReact.Provider app={app} store={store}>
+				<App />
+			</MobxReact.Provider>
+		</ErrorBoundary>,
 		document.getElementById('app')
 	);
 }
