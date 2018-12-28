@@ -7,6 +7,7 @@ import * as Model from '../../model';
 import * as Type from '../../types';
 import { Sender } from '../../sender';
 import * as uuid from 'uuid';
+import { PlaceholderPosition } from '../../components';
 
 jest.mock('../../sender');
 
@@ -51,7 +52,7 @@ test('un-highlight highlighted element content onDragLeave', () => {
 			highlighted: false,
 			propertyValues: [],
 			forcedOpen: false,
-			placeholderHighlighted: false
+			placeholderHighlighted: PlaceholderPosition.None
 		},
 		{
 			project
@@ -103,7 +104,7 @@ test('un-highlight highlighted element content onDragLeave', () => {
 			highlighted: true,
 			propertyValues: [],
 			forcedOpen: false,
-			placeholderHighlighted: false
+			placeholderHighlighted: PlaceholderPosition.None
 		},
 		{
 			project
